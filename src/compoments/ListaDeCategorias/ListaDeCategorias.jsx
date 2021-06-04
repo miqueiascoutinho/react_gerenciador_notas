@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./estilo.css";
 class ListaDeCategorias extends Component {
   _handlerCriarCategoria(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && event.target.value.trim().length > 0) {
         this.props.criarCategoria(event.target.value);
         event.target.value = "";
     }
