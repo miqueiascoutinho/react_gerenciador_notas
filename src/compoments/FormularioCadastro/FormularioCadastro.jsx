@@ -25,7 +25,6 @@ class FormularioCadastro extends Component {
     evento.preventDefault();
     evento.stopPropagation();
     this.props.novaNota(this.titulo, this.nota);
-    
   }
 
   render() {
@@ -37,7 +36,7 @@ class FormularioCadastro extends Component {
           type="text"
           placeholder="Título"
           className="form-cadastro_input"
-          value={this.state.texto}
+          
           onChange = {this._handlerDigitarTitulo.bind(this)}
           
         />

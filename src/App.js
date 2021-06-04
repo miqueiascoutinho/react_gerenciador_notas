@@ -7,8 +7,7 @@ import './assets/index.css';
 class App extends Component {
 
   constructor() {
-    super();
-    
+    super();    
     this.state = {
       notas: []
     }
@@ -16,19 +15,29 @@ class App extends Component {
 
   criarNota(titulo, descricao) {
     const novaNota = {titulo, descricao};
-    //this.notas.push(novaNota);
-    const novasNotas = [...this.state.notas, novaNota];
+    const todasNotas = [...this.state.notas, novaNota];
 
     this.setState({
-      notas:novasNotas,
-      texto: 'ok'
+      notas:todasNotas
     })
   }
+
+  excluirNota(indice) {
+    this.notas = this.state.notas;
+    this.notas.splice(indice,1);
+  
+    this.setState({
+      notas: this.notas
+    })
+    
+
+  }
+
   render() {
     return (
       <section className="conteudo">
         <FormularioCadastro novaNota={this.criarNota.bind(this)}/>
-        <ListaDeNotas notas={this.state.notas}/>
+        <ListaDeNotas notas={this.state.notas} excluirNota={this.excluirNota.bind(this)}/>
       </section>
     );
   }
