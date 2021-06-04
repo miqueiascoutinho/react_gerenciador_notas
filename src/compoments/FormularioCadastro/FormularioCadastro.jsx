@@ -12,12 +12,10 @@ class FormularioCadastro extends Component {
 
   _handlerDigitarTitulo(evento){
     this.titulo = evento.target.value;
-  //  console.log(`Título: ${this.titulo}`);
   }
   
   _handerDigitarNota(evento) {
     this.nota = evento.target.value;
-    //console.log(`Nota: ${this.nota}`)
   }
   
   _handlerCriarNota(evento) {
