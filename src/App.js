@@ -19,7 +19,7 @@ class App extends Component {
     const todasNotas = [...this.state.notas, novaNota];
 
     this.setState({
-      notas: todasNotas, 
+      notas: todasNotas,
       categorias: this.state.categorias
     });
   }
@@ -35,7 +35,7 @@ class App extends Component {
 
   criarCategoria(categoria) {
     let todasCategorias = [...this.state.categorias, categoria];
-    let novoEstado = {...this.state, categorias: todasCategorias}
+    let novoEstado = { ...this.state, categorias: todasCategorias };
 
     this.setState(novoEstado);
   }
@@ -43,7 +43,10 @@ class App extends Component {
   render() {
     return (
       <section className="conteudo">
-        <FormularioCadastro novaNota={this.criarNota.bind(this)} />
+        <FormularioCadastro
+          novaNota={this.criarNota.bind(this)}
+          categorias={this.state.categorias}
+        />
         <main className="conteudo-principal">
           <ListaDeCategorias
             criarCategoria={this.criarCategoria.bind(this)}
