@@ -34,12 +34,10 @@ class App extends Component {
   }
 
   criarCategoria(categoria) {
-    console.log(categoria);
+    let todasCategorias = [...this.state.categorias, categoria];
+    let novoEstado = {...this.state, categorias: todasCategorias}
 
-    this.setState({
-      notas: this.state.notas, 
-      categorias: [...this.state.categorias, categoria]
-    });
+    this.setState(novoEstado);
   }
 
   render() {
