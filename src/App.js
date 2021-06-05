@@ -20,12 +20,14 @@ class App extends Component {
       <section className="conteudo">
         <FormularioCadastro
           novaNota={this.notas.adicionarNota.bind(this.notas)}
-          inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
+          //inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
+          categorias={this.categorias}
         />
         <main className="conteudo-principal">
           <ListaDeCategorias
-            criarCategoria={this.categorias.adicionarCategoria.bind(this.categorias)}
-            inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
+            //criarCategoria={this.categorias.adicionarCategoria.bind(this.categorias)}
+            //inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
+            categorias={this.categorias}
           />
           <ListaDeNotas
             excluirNota={this.notas.excluirNota.bind(this.notas)}

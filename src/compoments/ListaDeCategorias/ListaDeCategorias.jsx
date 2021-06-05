@@ -9,7 +9,8 @@ class ListaDeCategorias extends Component {
   }
 
   componentDidMount(){
-    this.props.inscreverCategoria(this._atualizarCategorias.bind(this))
+    //this.props.inscreverCategoria(this._atualizarCategorias.bind(this))
+    this.props.categorias.inscrever(this._atualizarCategorias.bind(this))
   }
 
   _atualizarCategorias(categorias){
@@ -18,7 +19,8 @@ class ListaDeCategorias extends Component {
 
   _handlerCriarCategoria(event) {
     if (event.keyCode === 13 && event.target.value.trim().length > 0) {
-        this.props.criarCategoria(event.target.value);
+        //this.props.criarCategoria(event.target.value);
+        this.props.categorias.adicionarCategoria(event.target.value);
         event.target.value = "";
     }
   }

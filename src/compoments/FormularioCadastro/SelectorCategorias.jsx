@@ -9,7 +9,7 @@ class SelectorCategorias extends Component {
   }
   
   componentDidMount() {
-    this.props.inscreverCategoria(this._atualizarComboCategorias.bind(this))
+    this.props.categorias.inscrever(this._atualizarComboCategorias.bind(this))
   }
   
   _atualizarComboCategorias(categorias){
