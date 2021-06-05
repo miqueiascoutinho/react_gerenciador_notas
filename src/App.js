@@ -2,56 +2,34 @@ import React, { Component } from "react";
 import ListaDeNotas from "./compoments/ListaDeNotas";
 import FormularioCadastro from "./compoments/FormularioCadastro";
 import ListaDeCategorias from "./compoments/ListaDeCategorias";
+import Categorias from "./dados/Categorias";
+import Notas from "./dados/Notas";
+
 import "./assets/App.css";
 import "./assets/index.css";
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      notas: [],
-      categorias: []
-    };
-  }
-
-  criarNota(titulo, descricao, categoria) {
-    const novaNota = { titulo, descricao, categoria };
-    const todasNotas = [...this.state.notas, novaNota];
-    const novoEstado = {...this.state, notas: todasNotas};
-    this.setState(novoEstado);
-  }
-
-  excluirNota(indice) {
-    this.notas = this.state.notas;
-    this.notas.splice(indice, 1);
-
-    this.setState({
-      notas: this.notas
-    });
-  }
-
-  criarCategoria(categoria) {
-    let todasCategorias = [...this.state.categorias, categoria];
-    let novoEstado = { ...this.state, categorias: todasCategorias };
-
-    this.setState(novoEstado);
+    this.categorias = new Categorias();
+    this.notas = new Notas();
   }
 
   render() {
     return (
       <section className="conteudo">
         <FormularioCadastro
-          novaNota={this.criarNota.bind(this)}
-          categorias={this.state.categorias}
+          novaNota={this.notas.adicionarNota.bind(this.notas)}
+          inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
         />
         <main className="conteudo-principal">
           <ListaDeCategorias
-            criarCategoria={this.criarCategoria.bind(this)}
-            categorias={this.state.categorias}
+            criarCategoria={this.categorias.adicionarCategoria.bind(this.categorias)}
+            inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
           />
           <ListaDeNotas
-            notas={this.state.notas}
-            excluirNota={this.excluirNota.bind(this)}
+            excluirNota={this.notas.excluirNota.bind(this.notas)}
+            inscreverNota={this.notas.inscrever.bind(this.notas)}
           />
         </main>
       </section>

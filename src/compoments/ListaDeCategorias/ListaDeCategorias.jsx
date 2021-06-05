@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 import "./estilo.css";
 class ListaDeCategorias extends Component {
+
+  constructor(){
+    super();
+    this.categorias = [];
+    this.state = {categorias : this.categorias}
+  }
+
+  componentDidMount(){
+    this.props.inscreverCategoria(this._atualizarCategorias.bind(this))
+  }
+
+  _atualizarCategorias(categorias){
+    this.setState({...this.state, categorias})
+  }
+
   _handlerCriarCategoria(event) {
     if (event.keyCode === 13 && event.target.value.trim().length > 0) {
         this.props.criarCategoria(event.target.value);
@@ -11,7 +26,7 @@ class ListaDeCategorias extends Component {
     return (
       <section className="lista-categorias">
         <ul className="lista-categorias_lista">
-          {this.props.categorias.map((categoria, indice) => {
+          {this.state.categorias.map((categoria, indice) => {
             return (
               <li key={indice} className="lista-categorias_item">
                 {categoria}

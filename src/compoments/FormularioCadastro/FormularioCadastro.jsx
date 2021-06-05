@@ -37,7 +37,7 @@ class FormularioCadastro extends Component {
         onSubmit={this._handlerCriarNota.bind(this)}
       >
         <SelectorCategorias
-          categorias={this.props.categorias}
+          inscreverCategoria={this.props.inscreverCategoria.bind(this)}
           setCategoria={this.setCategoria.bind(this)}
         />
         <input
