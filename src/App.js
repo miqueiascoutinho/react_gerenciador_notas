@@ -14,14 +14,11 @@ class App extends Component {
     };
   }
 
-  criarNota(titulo, descricao) {
-    const novaNota = { titulo, descricao };
+  criarNota(titulo, descricao, categoria) {
+    const novaNota = { titulo, descricao, categoria };
     const todasNotas = [...this.state.notas, novaNota];
-
-    this.setState({
-      notas: todasNotas,
-      categorias: this.state.categorias
-    });
+    const novoEstado = {...this.state, notas: todasNotas};
+    this.setState(novoEstado);
   }
 
   excluirNota(indice) {

@@ -7,7 +7,12 @@ class FormularioCadastro extends Component {
     super(props);
     this.titulo = "";
     this.nota = "";
+    this.categoria = "Sem categoria";
     this.state = {};
+  }
+
+  setCategoria(categoria) {
+    this.categoria = categoria;
   }
 
   _handlerDigitarTitulo(evento) {
@@ -22,7 +27,7 @@ class FormularioCadastro extends Component {
     this.setState({ nome: this.nota });
     evento.preventDefault();
     evento.stopPropagation();
-    this.props.novaNota(this.titulo, this.nota);
+    this.props.novaNota(this.titulo, this.nota, this.categoria);
   }
 
   render() {
@@ -31,7 +36,10 @@ class FormularioCadastro extends Component {
         className="form-cadastro "
         onSubmit={this._handlerCriarNota.bind(this)}
       >
-        <SelectorCategorias categorias={this.props.categorias} />
+        <SelectorCategorias
+          categorias={this.props.categorias}
+          setCategoria={this.setCategoria.bind(this)}
+        />
         <input
           type="text"
           placeholder="Título"

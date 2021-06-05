@@ -14,9 +14,8 @@ class CardNota extends Component {
       <section className="card-nota">
         <header className="card-nota_cabecalho">
           <DeleteSvg onClick={this._handlerExcluirCard.bind(this)}/>
-          
-
           <h3 className="card-nota_titulo">{this.props.nota.titulo}</h3>
+          <h4 className="card-nota_categoria">{this.props.nota.categoria}</h4>
         </header>
         <p className="card-nota_texto">{this.props.nota.descricao}</p>
       </section>
