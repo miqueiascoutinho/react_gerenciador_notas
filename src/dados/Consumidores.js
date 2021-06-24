@@ -8,6 +8,11 @@ export default class Consumidores {
         this.consumidores.push(funct);
     }
 
+    desinscrever(funct){
+        let novosConsumidores  = this.consumidores.filter(f => f !== funct)
+        this.consumidores = novosConsumidores;
+    }
+
     notificar(objUpdate) {
         this.consumidores.forEach(consumer =>{
             consumer(objUpdate);

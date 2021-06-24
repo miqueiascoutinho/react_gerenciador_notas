@@ -6,10 +6,15 @@ class SelectorCategorias extends Component {
   constructor(){
     super();
     this.state = {categorias: []}
+    this._functCategoriasConsumer = this._atualizarComboCategorias.bind(this);
   }
   
   componentDidMount() {
-    this.props.categorias.inscrever(this._atualizarComboCategorias.bind(this))
+    this.props.categorias.inscrever(this._functCategoriasConsumer)
+  }
+
+  componentWillUnmount() {
+    this.props.categorias.desinscrever(this._functCategoriasConsumer)
   }
   
   _atualizarComboCategorias(categorias){
