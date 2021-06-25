@@ -1,50 +1,48 @@
-import React, { Component } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import DadosContexts from "../../contexts/DadosContexts";
 import "./estilo.css";
-class ListaDeCategorias extends Component {
+function ListaDeCategorias() {
+  const [categorias, setCategorias] = useState([]);
+  const dados = useContext(DadosContexts);
 
-  constructor(){
-    super();
-    this.categorias = [];
-    this.state = {categorias : this.categorias}
-  }
+  useEffect(() => {
+    function atualizarCategorias(ctgs) {
+      setCategorias([...ctgs]);
+    }
 
-  componentDidMount(){
-    //this.props.inscreverCategoria(this._atualizarCategorias.bind(this))
-    this.props.categorias.inscrever(this._atualizarCategorias.bind(this))
-  }
+    dados.categorias.inscrever(atualizarCategorias);
 
-  _atualizarCategorias(categorias){
-    this.setState({...this.state, categorias})
-  }
+    return function cleanUp() {
+      dados.categorias.desinscrever(atualizarCategorias);
+    };
+  });
 
-  _handlerCriarCategoria(event) {
+  function _handlerCriarCategoria(event) {
     if (event.keyCode === 13 && event.target.value.trim().length > 0) {
-        //this.props.criarCategoria(event.target.value);
-        this.props.categorias.adicionarCategoria(event.target.value);
-        event.target.value = "";
+      dados.categorias.adicionarCategoria(event.target.value);
+      event.target.value = "";
     }
   }
-  render() {
-    return (
-      <section className="lista-categorias">
-        <ul className="lista-categorias_lista">
-          {this.state.categorias.map((categoria, indice) => {
-            return (
-              <li key={indice} className="lista-categorias_item">
-                {categoria}
-              </li>
-            );
-          })}
-        </ul>
-        <input
-          type="text"
-          placeholder="Digite uma categoria"
-          className="lista-categorias_input"
-          onKeyUp={this._handlerCriarCategoria.bind(this)}
-        />
-      </section>
-    );
-  }
+
+  return (
+    <section className="lista-categorias">
+      <ul className="lista-categorias_lista">
+        {categorias.map((categoria, indice) => {
+          return (
+            <li key={indice} className="lista-categorias_item">
+              {categoria}
+            </li>
+          );
+        })}
+      </ul>
+      <input
+        type="text"
+        placeholder="Digite uma categoria"
+        className="lista-categorias_input"
+        onKeyUp={_handlerCriarCategoria}
+      />
+    </section>
+  );
 }
 
 export default ListaDeCategorias;

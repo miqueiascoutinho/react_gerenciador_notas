@@ -1,26 +1,24 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import "./estilo.css";
-//import deleteSvg from "../../assets/img/delete.svg";
-import {ReactComponent as DeleteSvg} from "../../assets/img/delete.svg";
-class CardNota extends Component {
+import { ReactComponent as DeleteSvg } from "../../assets/img/delete.svg";
+import DadosContexts from "../../contexts/DadosContexts";
+function CardNota({ indice, nota }) {
+  const dados = useContext(DadosContexts);
 
-  _handlerExcluirCard() {
-    this.indice = this.props.indice;
-    this.props.excluirNota(this.indice);
+  function _handlerExcluirCard() {
+    dados.notas.excluirNota(indice);
   }
-  
-  render() {
-    return (
-      <section className="card-nota">
-        <header className="card-nota_cabecalho">
-          <DeleteSvg onClick={this._handlerExcluirCard.bind(this)}/>
-          <h3 className="card-nota_titulo">{this.props.nota.titulo}</h3>
-          <h4 className="card-nota_categoria">{this.props.nota.categoria}</h4>
-        </header>
-        <p className="card-nota_texto">{this.props.nota.descricao}</p>
-      </section>
-    );
-  }
+
+  return (
+    <section className="card-nota">
+      <header className="card-nota_cabecalho">
+        <DeleteSvg onClick={_handlerExcluirCard} />
+        <h3 className="card-nota_titulo">{nota.titulo}</h3>
+        <h4 className="card-nota_categoria">{nota.categoria}</h4>
+      </header>
+      <p className="card-nota_texto">{nota.descricao}</p>
+    </section>
+  );
 }
 
 export default CardNota;

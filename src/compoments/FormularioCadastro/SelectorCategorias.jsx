@@ -1,49 +1,44 @@
-import React, { Component } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import DadosContexts from "../../contexts/DadosContexts";
 import "./estilo.css";
 
-class SelectorCategorias extends Component {
-  
-  constructor(){
-    super();
-    this.state = {categorias: []}
-    this._functCategoriasConsumer = this._atualizarComboCategorias.bind(this);
-  }
-  
-  componentDidMount() {
-    this.props.categorias.inscrever(this._functCategoriasConsumer)
+function SelectorCategorias(props) {
+  const dadosContexts = useContext(DadosContexts);
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    function atualizarCategorias(ctgs) {
+      setCategorias([...ctgs]);
+    }
+
+    dadosContexts.categorias.inscrever(atualizarCategorias);
+
+    return function cleanUP() {
+      dadosContexts.categorias.desinscrever(atualizarCategorias);
+    }
+  });
+
+  function _handlerSelecionarCategoria(evento) {
+    props.selecionarCateroria(evento.target.value);
   }
 
-  componentWillUnmount() {
-    this.props.categorias.desinscrever(this._functCategoriasConsumer)
-  }
-  
-  _atualizarComboCategorias(categorias){
-    this.setState({...this.state, categorias});
-  }
-
-  _handlerSelecionarCategoria(event) {
-    this.props.setCategoria(event.target.value);
-  }
-
-  render() {
-    return (
-      <select
-        className="form-cadastro_select"
-        name="categorias"
-        placeholder="Selecione a categoria"
-        onChange={this._handlerSelecionarCategoria.bind(this)}
-      >
-        <option>Sem categoria</option>
-        {this.state.categorias.sort().map((categoria, index) => {
-          return (
-            <option key={index} className="form-cadastro_select_item">
-              {categoria}
-            </option>
-          );
-        })}
-      </select>
-    );
-  }
+  return (
+    <select
+      className="form-cadastro_select"
+      name="categorias"
+      placeholder="Selecione a categoria"
+      onChange={_handlerSelecionarCategoria}
+    >
+      <option>Sem categoria</option>
+      {categorias.sort().map((categoria, index) => {
+        return (
+          <option key={index} className="form-cadastro_select_item">
+            {categoria}
+          </option>
+        );
+      })}
+    </select>
+  );
 }
 
 export default SelectorCategorias;

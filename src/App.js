@@ -4,6 +4,7 @@ import FormularioCadastro from "./compoments/FormularioCadastro";
 import ListaDeCategorias from "./compoments/ListaDeCategorias";
 import Categorias from "./dados/Categorias";
 import Notas from "./dados/Notas";
+import DadosContexts from "./contexts/DadosContexts";
 
 import "./assets/App.css";
 import "./assets/index.css";
@@ -17,24 +18,20 @@ class App extends Component {
 
   render() {
     return (
-      <section className="conteudo">
-        <FormularioCadastro
-          novaNota={this.notas.adicionarNota.bind(this.notas)}
-          //inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
-          categorias={this.categorias}
-        />
-        <main className="conteudo-principal">
-          <ListaDeCategorias
-            //criarCategoria={this.categorias.adicionarCategoria.bind(this.categorias)}
-            //inscreverCategoria={this.categorias.inscrever.bind(this.categorias)}
-            categorias={this.categorias}
-          />
-          <ListaDeNotas
-            excluirNota={this.notas.excluirNota.bind(this.notas)}
-            inscreverNota={this.notas.inscrever.bind(this.notas)}
-          />
-        </main>
-      </section>
+      <DadosContexts.Provider
+        value={{
+          notas:this.notas,
+          categorias:this.categorias,
+        }}
+      >
+        <section className="conteudo">
+          <FormularioCadastro />
+          <main className="conteudo-principal">
+            <ListaDeCategorias />
+            <ListaDeNotas />
+          </main>
+        </section>
+      </DadosContexts.Provider>
     );
   }
 }
