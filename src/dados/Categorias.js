@@ -10,4 +10,9 @@ export default class Categorias extends Consumidores{
         this.categorias.push(novaCategoria);
         this.notificar(this.categorias);
     }
+
+    removerCategoria(index) {
+        this.categorias.splice(index, 1);
+        this.notificar(this.categorias);
+    }
 }

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import DadosContexts from "../../contexts/DadosContexts";
 import "./estilo.css";
+import { ReactComponent as DeleteSvg } from "../../assets/img/delete_forever.svg";
+
 function ListaDeCategorias() {
   const [categorias, setCategorias] = useState([]);
   const dados = useContext(DadosContexts);
@@ -24,12 +26,25 @@ function ListaDeCategorias() {
     }
   }
 
+  function _renderizarBotaoDeleteCategoria(index) {
+    return (
+      <DeleteSvg
+        onDoubleClick={removerCategoria}
+      />
+    );
+
+    function removerCategoria(){
+      dados.categorias.removerCategoria(index);
+    }
+  }
+
   return (
     <section className="lista-categorias">
       <ul className="lista-categorias_lista">
         {categorias.map((categoria, indice) => {
           return (
             <li key={indice} className="lista-categorias_item">
+              {_renderizarBotaoDeleteCategoria(indice)}
               {categoria}
             </li>
           );
